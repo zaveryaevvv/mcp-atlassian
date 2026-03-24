@@ -30,6 +30,8 @@ if os.getenv(
 import click
 from fastmcp import settings as fastmcp_settings
 
+import mcp_atlassian.utils._fastmcp_compat  # noqa: F401  # apply ctx-param patch
+
 # Fix high CPU usage on Windows - use SelectorEventLoop instead of ProactorEventLoop
 # ProactorEventLoop uses IOCP which can cause busy-waiting when combined with
 # synchronous libraries (like requests) that use select() for socket operations.

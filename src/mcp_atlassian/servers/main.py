@@ -12,7 +12,6 @@ from urllib.parse import urlparse
 from cachetools import TTLCache
 from fastmcp import FastMCP
 from fastmcp import settings as fastmcp_settings
-from fastmcp.server.event_store import EventStore
 from fastmcp.server.http import StarletteWithLifespan
 from fastmcp.tools import Tool as FastMCPTool
 from mcp.types import Tool as MCPTool
@@ -335,8 +334,6 @@ class AtlassianMCP(FastMCP[MainAppContext]):
         json_response: bool | None = None,
         stateless_http: bool | None = None,
         transport: Literal["http", "streamable-http", "sse"] = "streamable-http",
-        event_store: EventStore | None = None,
-        retry_interval: int | None = None,
     ) -> StarletteWithLifespan:
         final_path = path
         if transport == "streamable-http":
@@ -354,8 +351,6 @@ class AtlassianMCP(FastMCP[MainAppContext]):
             json_response=json_response,
             stateless_http=stateless_http,
             transport=transport,
-            event_store=event_store,
-            retry_interval=retry_interval,
         )
         return app
 
